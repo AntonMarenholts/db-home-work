@@ -66,8 +66,8 @@ INSERT INTO employees (
 
 ### задания
 1. Вывести все записи из таблицы **employees**.
-SELECT *
-FROM employees;
+- SELECT *
+- FROM employees;
 
 2. Вывести только **имена** и **фамилии** сотрудников из таблицы **employees**.
 SELECT
@@ -290,4 +290,4 @@ FROM
   Employees
 WHERE
   department_id IN (1, 2, 3);
-  
+
