@@ -68,254 +68,224 @@ INSERT INTO employees (
 1. Вывести все записи из таблицы **employees**.
 
 SELECT *
+
 FROM employees;
 
 2. Вывести только **имена** и **фамилии** сотрудников из таблицы **employees**.
 
-SELECT
-  first_name,
-  last_name
-FROM
-  employees;
+SELECT first_name,last_name
+
+FROM employees;
 
 3. Вывести всех сотрудников, работающих в отделе с идентификатором **5**.
 С id 5 нет!!!
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  department_id = 3;
+SELECT*
+
+FROM employees
+
+WHERE department_id = 3;
 
 4. Вывести все уникальные значения **должностей** сотрудников из таблицы **employees**.
 
-SELECT DISTINCT
-  job_title
-FROM
-  employees;
+SELECT DISTINCT job_title
+
+FROM employees;
 
 5. Вывести сотрудников, чья **зарплата превышает 5000**.
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  salary > 5000;
+SELECT*
+
+FROM employees
+
+WHERE salary > 5000;
 
 6. Вывести сотрудников, чья фамилия **начинается с буквы 'S'**.
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  last_name LIKE 'S%';
+SELECT*
+
+FROM employees
+
+WHERE last_name LIKE 'S%';
 
 7. Вывести сотрудников, которые были **наняты после 1 января 2020 года**.
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  hire_date > '2020-01-01';
+SELECT*
+
+FROM employees
+
+WHERE hire_date > '2020-01-01';
 
 8. Вывести **имена и фамилии** сотрудников, объединенные в одно поле через пробел, и их **зарплаты**.
 
 SELECT
-  CONCAT(first_name, ' ', last_name) AS full_name,
-  salary
-FROM
-  employees;
+
+  CONCAT(first_name, ' ', last_name) AS full_name,salary
+
+FROM employees;
 
 9. Вывести сотрудников, чьи **фамилии содержат подстроку 'son'**.
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  last_name LIKE '%son%';
+SELECT*
+
+FROM employees
+
+WHERE last_name LIKE '%son%';
 
 10. Вывести **количество сотрудников** в каждом отделе.
 
 SELECT
+
   department_id,
   COUNT(*) AS employees_count
-FROM
-  employees
-GROUP BY
-  department_id;
+
+FROM employees
+
+GROUP BY department_id;
 
 11. Вывести **среднюю зарплату** по каждому отделу.
 
 SELECT
+
   department_id,
   AVG(salary) AS average_salary
-FROM
-  employees
-GROUP BY
-  department_id;
+
+FROM employees
+
+GROUP BY department_id;
 
 12. Вывести **минимальную и максимальную зарплаты** сотрудников.
 
 SELECT
+
   MIN(salary) AS min_salary,
   MAX(salary) AS max_salary
-FROM
-  employees;
+
+FROM employees;
 
 13. Вывести сотрудников, чьи **зарплаты находятся в диапазоне от 4000 до 6000**.
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  salary >= 4000
-  AND salary < + 6000;
+SELECT*
+
+FROM employees
+WHERE salary >= 4000 AND salary < + 6000;
 
 14. Вывести **отделы** и **сумму зарплат** всех сотрудников в каждом отделе.
 
-SELECT
-  department_id,
-  SUM(salary) AS total_salary
-FROM
-  employees
-GROUP BY
-  department_id;
+SELECT department_id,SUM(salary) AS total_salary
+
+FROM employees
+
+GROUP BY department_id;
 
 15. Вывести сотрудников, у которых **нет менеджера** (*manager_id IS NULL*).
 
-SELECT
-  *
-FROM
-  employees
-WHERE
-  manager_id IS NULL;
+SELECT*
+
+FROM employees
+
+WHERE manager_id IS NULL;
 
 16. Вывести **фамилии сотрудников в порядке возрастания**.
 
-SELECT
-  last_name
-FROM
-  employees
-ORDER BY
-  last_name;
+SELECT last_name
+
+FROM employees
+
+ORDER BY last_name;
 
 17. Вывести **10 сотрудников с наибольшими зарплатами**.
 
-SELECT
-  *
-FROM
-  employees
-ORDER BY
-  salary DESC
-LIMIT
-  10;
+SELECT*
+
+FROM employees
+
+ORDER BY salary DESC
+
+LIMIT 10;
 
 18. Вывести сотрудников, **нанятых в 2019 году**.
 
-SELECT
-  *
-FROM
-  Employees
-WHERE
-  EXTRACT(
-    YEAR
-    FROM
-      hire_date
-  ) = 2019;
+SELECT*
+
+FROM Employees
+
+WHERE EXTRACT(YEAR FROM hire_date) = 2019;
 
 19. Вывести **количество сотрудников с каждой должностью**.
 
-SELECT
-  job_title,
-  COUNT(*) AS employee_count
-FROM
-  employees
-GROUP BY
-  job_title;
+SELECT job_title,COUNT(*) AS employee_count
+
+FROM employees
+
+GROUP BY job_title;
 
 20. Вывести всех **менеджеров** (*manager_id IS NOT NULL*) и их **подчиненных**.
 
 SELECT
+
   m.employee_id AS manager_id,
   m.first_name AS manager_first_name,
   m.last_name AS manager_last_name,
   e.employee_id AS subordinate_id,
   e.first_name AS subordinate_first_name,
   e.last_name AS subordinate_last_name
-FROM
-  Employees e
+
+FROM Employees e
+
   JOIN Employees m ON e.manager_id = m.employee_id
-ORDER BY
-  m.employee_id;
+
+ORDER BY m.employee_id;
 
 21. Вывести **имена и фамилии сотрудников**, а также **идентификатор их отдела**, включая отдел с идентификатором **10**.
 (идентификатора 10 нет,я сделал с номером 1)
 
 
-SELECT
-  first_name,
-  last_name,
-  department_id
-FROM
-  Employees
-WHERE
-  department_id = 1
-UNION ALL
-SELECT
-  first_name,
-  last_name,
-  department_id
-FROM
-  Employees
-WHERE
-  department_id <> 1;
+SELECT first_name,last_name,department_id
+
+FROM Employees
+
+WHERE department_id = 1
+
+UNION ALL SELECT first_name,last_name,department_id
+
+FROM Employees
+
+WHERE department_id <> 1;
 
 22. Вывести **названия должностей** и **количество сотрудников** на каждой должности, только если их количество **больше 1**.
 
-SELECT
-  job_title,
+SELECT job_title,
+
   COUNT(*) AS employee_count
-FROM
-  Employees
-GROUP BY
-  job_title
-HAVING
-  COUNT(*) > 1;
+
+FROM Employees
+
+GROUP BY job_title
+
+HAVING COUNT(*) > 1;
 
 23. Вывести **среднюю зарплату сотрудников**, работающих **под руководством менеджера с идентификатором 3**.
 
-SELECT
-  AVG(e.salary) AS average_salary
-FROM
-  Employees e
-WHERE
-  e.manager_id = 3;
+SELECT AVG(e.salary) AS average_salary
+
+FROM Employees e
+
+WHERE e.manager_id = 3;
 
 24. Вывести **названия должностей** и **средние зарплаты сотрудников** на каждой должности.
 
-SELECT
-  job_title,
-  AVG(salary) AS average_salary
-FROM
-  Employees
-GROUP BY
-  job_title;
+SELECT job_title,AVG(salary) AS average_salary
+
+FROM Employees
+
+GROUP BY job_title;
 
 25. Вывести сотрудников, которые работают в **отделах с идентификаторами 1, 3 и 5**.
 
 SELECT*
 
-FROM
+FROM Employees
 
-  Employees
-
-WHERE
-
-  department_id IN (1, 2, 3);
+WHERE department_id IN (1, 2, 3);
   
